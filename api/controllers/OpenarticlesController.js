@@ -33,8 +33,42 @@ if(err)
 }
 res.redirect('/openarticles/list')
         })
-    }
+    },
+    delete:function(req,res)
+    {
+        Openarticles.destroy({id:req.params.id}).exec(function(err){
+            if(err)
+{
+    res.send(500,{error:'DB error'})
+}
+res.redirect('/openarticles/list')
+        })
+        return false;
+    },
+    edit:function(req,res)
+    {
+        Openarticles.findOne({id:req.params.id}).exec(function(err,article){
+            if(err)
+{
+    res.send(500,{error:'DB error'})
+}
+res.view('edit',{article:article})
+        })
+    },
+    update:function(req,res){
 
+        var title=req.body.title;
+        var body=req.body.content;
+
+        Openarticles.update({id:req.params.id},{Title:title,body:body}).exec(function(err){
+            if(err)
+            {
+                res.send(500,{error:'DB error'})
+            }
+            res.redirect('/openarticles/list')
+                    })
+                    return false;
+    }
     
 };
 

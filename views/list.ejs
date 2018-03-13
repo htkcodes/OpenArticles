@@ -12,7 +12,13 @@
             <tr>
                 <td><%= article.id %></td>
                 <td><%= article.Title %></td>
-                <td></td>
+                <td
+                >
+            <a href="/openarticles/edit/<%= article.id %>" class="btn btn-primary">EDIT</a>
+            <form action="/openarticles/delete/<%= article.id %>" method="POST" class="d-inline">
+            <input type="submit" class="btn btn-danger" value="delete">
+            </form>
+            </td>
             </tr>
         <%})%>
     </tbody>
